@@ -42,3 +42,18 @@ $customers = $request->fetchall();
 </body>
 
 </html>
+
+SELECT 
+    clients.lastName,
+    clients.firstName,
+    clients.cardNumber,
+    cards.cardTypesId,
+    cardTypes.type
+FROM 
+    clients
+INNER JOIN 
+    cards ON clients.cardNumber = cards.cardNumber
+INNER JOIN 
+    cardTypes ON cards.cardTypesId = cardTypes.id
+WHERE 
+    clients.cardNumber IS NOT NULL;
