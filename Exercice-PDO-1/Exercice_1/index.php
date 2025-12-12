@@ -8,7 +8,7 @@
                                 clients"
                         );
     
-    $users = $request->fetchAll();
+    $customers = $request->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +22,9 @@
    <ul>
     <h1>Voici la liste des clients :</h1>
     <?php
-        foreach ($users as $user) {
+        foreach ($customers as $customer) {
     ?>
-        <li><?= $user['lastname'] . " " . $user['firstname'];?></li>
+        <li><?= $customer['lastname'] . " " . $customer['firstname'];?></li>
     <?php
         }
     ?>
