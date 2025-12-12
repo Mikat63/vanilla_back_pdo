@@ -7,9 +7,11 @@ $request = $db->query(
         firstName 
     FROM 
         `clients` 
-     WHERE 
+    WHERE 
         lastName 
-    like 'M%';"
+            like 'M%'
+    ORDER BY 
+        lastName ASC;"
 );
 
 $customers = $request->fetchAll();
