@@ -1,7 +1,12 @@
 <?php
 require_once "../bdd_connect.php";
 
-$request = $db->query("SELECT * FROM showtypes");
+$request = $db->query(
+    "SELECT 
+        type 
+    FROM 
+        showtypes;"
+);
 
 $showTypes = $request->fetchAll();
 ?>

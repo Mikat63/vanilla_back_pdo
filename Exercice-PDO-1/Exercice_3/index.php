@@ -1,7 +1,16 @@
 <?php
 require_once "../bdd_connect.php";
 
-$request = $db->query("SELECT * FROM clients LIMIT 20");
+$request = $db->query(
+    "SELECT 
+        lastName,
+        firstName 
+    FROM 
+        clients 
+    LIMIT 
+        20"
+);
+    
 $customers = $request->fetchAll();
 ?>
 
