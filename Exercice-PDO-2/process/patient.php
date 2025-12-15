@@ -44,7 +44,7 @@ $phone = htmlspecialchars(strip_tags($_POST['phone']));
 try {
     require_once "db_connect.php";
 
-    $request = $bddConnect->prepare("INSERT INTO 
+    $request = $db->prepare("INSERT INTO 
                                 patients (`lastname`, 
                                           `firstname`, 
                                           `birthdate`, 
