@@ -35,18 +35,14 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-$lastName = htmlspecialchars(strip_tags($_POST['lastName']));
-$firstName = htmlspecialchars(strip_tags($_POST['firstName']));
+$lastName = htmlspecialchars(strip_tags(strtoupper($_POST['lastName'])));
+$firstName = htmlspecialchars(strip_tags(ucfirst($_POST['firstName'])));
 $birthDate = htmlspecialchars(strip_tags($_POST['birthDate']));
 $email = htmlspecialchars(strip_tags($_POST['email']));
 $phone = htmlspecialchars(strip_tags($_POST['phone']));
 
 try {
-    $dsn = "mysql:host=localhost;dbname=hospitale2n";
-    $user = "root";
-    $password = "";
-
-    $bddConnect = new PDO($dsn, $user, $password);
+    require_once "db_connect.php";
 
     $request = $bddConnect->prepare("INSERT INTO 
                                 patients (`lastname`, 
@@ -66,5 +62,6 @@ try {
 
     header("Location: ../ajout_patient.php?success=success_process");
 } catch (PDOException $error) {
-    header("Location: ../ajout_patient.php?error=$error");
+    header("Location: ../ajout_patient.php?error=" . urlencode($error->getMessage()));
+    exit();
 }
