@@ -3,14 +3,18 @@ require_once "../bdd_connect.php";
 
 $request = $db->query(
     "SELECT 
-        lastName,
-        firstName,
-        cardNumber
+        c.lastName,
+        c.firstName,
+        c.cardNumber
     FROM 
-        clients 
-    WHERE 
-        cardNumber 
-            is not null;"
+        clients AS c 
+    JOIN 
+        cards AS ca ON c.cardNumber = ca.cardNumber
+   	JOIN 
+    	cardtypes AS ct ON ct.id = ca.cardTypesId
+    WHERE
+    	ct.type = 'Fidélité';
+       "
 );
 
 $customers = $request->fetchall();
@@ -27,33 +31,18 @@ $customers = $request->fetchall();
 
 <body>
     <h1>Voici les clients possédants une carte de fidélité :</h1>
-        <?php
-            foreach ($customers as $customer) {
-        ?>
+    <?php
+    foreach ($customers as $customer) {
+    ?>
         <div>
-            <p><?= "Nom : " . " " . $customer['lastName'];?></p>
-            <p><?= "Préom : " . " " . $customer['firstName'];?></p>
-            <p><?= "Numéro de carte : " . " " . $customer['cardNumber'];?></p>
+            <p><?= "Nom : " . " " . $customer['lastName']; ?></p>
+            <p><?= "Préom : " . " " . $customer['firstName']; ?></p>
+            <p><?= "Numéro de carte : " . " " . $customer['cardNumber']; ?></p>
         </div>
         <br>
-        <?php
-            }
-        ?>
+    <?php
+    }
+    ?>
 </body>
 
 </html>
-
-SELECT 
-    clients.lastName,
-    clients.firstName,
-    clients.cardNumber,
-    cards.cardTypesId,
-    cardTypes.type
-FROM 
-    clients
-INNER JOIN 
-    cards ON clients.cardNumber = cards.cardNumber
-INNER JOIN 
-    cardTypes ON cards.cardTypesId = cardTypes.id
-WHERE 
-    clients.cardNumber IS NOT NULL;
