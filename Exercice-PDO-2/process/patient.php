@@ -1,0 +1,70 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: ../ajout_patient.php?error=bad_method');
+    exit();
+}
+
+if (!isset($_POST['lastName']) || !isset($_POST['firstName']) || !isset($_POST['birthDate']) || !isset($_POST['email']) || !isset($_POST['phone'])) {
+    header('Location: ../ajout_patient.php?error=missing');
+    exit();
+}
+
+if (empty(trim($_POST['lastName'])) || empty(trim($_POST['firstName'])) || empty(trim($_POST['birthDate'])) || empty(trim($_POST['email'])) || empty(trim($_POST['phone']))) {
+    header('Location: ../ajout_patient.php?error=empty');
+    exit();
+}
+
+if (strlen($_POST['lastName']) < 3 || strlen($_POST['firstName']) < 3 || strlen($_POST['birthDate']) < 3 || strlen($_POST['email']) < 3) {
+    header('Location: ../ajout_patient.php?error=min');
+    exit();
+}
+
+if (strlen($_POST['lastName']) > 30 || strlen($_POST['firstName']) > 30 || strlen($_POST['birthDate']) > 30 || strlen($_POST['email']) > 30) {
+    header('Location: ../ajout_patient.php?error=max');
+    exit();
+}
+
+if (strlen($_POST['phone']) < 5 || strlen($_POST['phone']) > 15) {
+    header('Location: ../ajout_patient.php?error=minMaxPhone');
+    exit();
+}
+
+if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../ajout_patient.php?error=invalidMail');
+    exit();
+}
+
+$lastName = htmlspecialchars(strip_tags($_POST['lastName']));
+$firstName = htmlspecialchars(strip_tags($_POST['firstName']));
+$birthDate = htmlspecialchars(strip_tags($_POST['birthDate']));
+$email = htmlspecialchars(strip_tags($_POST['email']));
+$phone = htmlspecialchars(strip_tags($_POST['phone']));
+
+try {
+    $dsn = "mysql:host=localhost;dbname=hospitale2n";
+    $user = "root";
+    $password = "";
+
+    $bddConnect = new PDO($dsn, $user, $password);
+
+    $request = $bddConnect->prepare("INSERT INTO 
+                                patients (`lastname`, 
+                                          `firstname`, 
+                                          `birthdate`, 
+                                          `phone`, 
+                                          `mail`) 
+                                    VALUES (:lastName,:firstName,:birthDate,:phone,:mail);");
+
+    $request->execute([
+        'lastName' => $lastName,
+        'firstName' => $firstName,
+        'birthDate' => $birthDate,
+        'phone' => $phone,
+        'mail' => $email
+    ]);
+
+    header("Location: ../ajout_patient.php?success=success_process");
+} catch (PDOException $error) {
+    header("Location: ../ajout_patient.php?error=$error");
+}
