@@ -8,6 +8,7 @@
   --title-font: manrope, sans-serif;
   --text-font: inter, sans-serif;
   --font-size-title: 42px;
+  --font-size-h2: 24px;
   --font-size-a: 20px;
   --font_size-text: 16px;
   --font-color-white: white;
@@ -41,17 +42,6 @@ main {
   padding: 20px;
 }
 
-aside {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--secondary-background-color);
-  padding: 36px;
-  color: var(--font-color-white);
-  width: 20%;
-  font-size: var(--font-size-a);
-}
-
 main {
   width: 80%;
 }
@@ -68,7 +58,7 @@ footer {
 }
 
 /* classes elements */
-.main_aside_container {
+.main_nav_container {
   display: flex;
   flex: 1;
 }
@@ -80,6 +70,11 @@ footer {
   padding: 28px;
   width: 80%;
   font-size: var(--font-size-text);
+  color: var(--font-color-black);
+}
+
+.main_container a {
+  color: var(--font-color-black);
 }
 
 .main_container_patient_profile {
@@ -114,20 +109,31 @@ footer {
   background-color: transparent;
 }
 
-.patient_container {
+.patient {
   border: 2px solid var(--secondary-background-color);
   border-radius: 4px;
   max-width: 400px;
   padding: 16px;
   font-family: var(--text-font);
+  box-shadow: 0 0 8px var(--secondary-background-color);
+}
+
+.patient_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 72px;
 }
 
 /* nav elements */
 nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: var(--secondary-background-color);
+  padding: 36px;
+  color: var(--font-color-white);
+  width: 20%;
+  font-size: var(--font-size-a);
 }
 
 /* title elements */
@@ -137,7 +143,7 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: var(--font-size-h2);
 }
 
 /* list elements */
@@ -153,13 +159,18 @@ ul {
 /* links elements */
 a {
   text-decoration: none;
-  color: var(--font-color);
+  color: var(--font-color-white); /* Correction ici */
   font-family: var(--text-font);
   cursor: pointer;
 }
 
 a:hover {
   color: var(--hover_color);
+}
+
+/* styles elements */
+hr {
+  border-color: var(--secondary-background-color);
 }
 
 /* buttons elements */
@@ -185,5 +196,5 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-h2);
 }
