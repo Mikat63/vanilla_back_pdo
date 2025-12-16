@@ -105,11 +105,12 @@ footer {
 .patient {
   border: 2px solid var(--secondary-background-color);
   border-radius: 4px;
+  width: 350px;
   max-width: 400px;
   padding: 16px;
   font-family: var(--text-font);
   box-shadow: 0 0 8px var(--secondary-background-color);
-  height: 100px;
+  height: auto;
 }
 
 .patient_container {
@@ -129,6 +130,8 @@ footer {
 .form_profil_container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 

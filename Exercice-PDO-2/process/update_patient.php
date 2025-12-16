@@ -1,21 +1,21 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../profil_patient.php?error=bad_method');
+    header('Location: ../patient_rendezvous.php?error=bad_method');
     exit();
 }
 
 if (!isset($_POST['id']) || !isset($_POST['lastName']) || !isset($_POST['firstName']) || !isset($_POST['birthDate']) || !isset($_POST['email']) || !isset($_POST['phone'])) {
-    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
+    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
 if (empty(trim($_POST['id'])) || empty(trim($_POST['lastName'])) || empty(trim($_POST['firstName'])) || empty(trim($_POST['birthDate'])) || empty(trim($_POST['email'])) || empty(trim($_POST['phone']))) {
-    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
+    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
 if (!filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
-    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=errorId');
+    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=errorId');
     exit();
 }
 

@@ -42,7 +42,7 @@ $patients = $request->fetchAll();
             </div>
 
             <div>
-                <label for="dateTime">Créneau:</label>
+                <label for="dateTime">Date et heure:</label>
                 <input type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
             </div>
 

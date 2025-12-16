@@ -18,5 +18,6 @@
     <ul class="nav-list">
         <li><span>Rendez-vous :</span></li>
         <li><a href="ajout_rendezvous.php">Ajouter rendez-vous</a></li>
+        <li><a href="liste_rendezvous.php">Liste des rendez-vous</a></li>
     </ul>
 </nav>
