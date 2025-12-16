@@ -1,7 +1,4 @@
 <?php
-
-
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../profil_patient.php?error=bad_method');
     exit();

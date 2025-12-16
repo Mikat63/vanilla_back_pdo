@@ -141,6 +141,7 @@ nav {
   color: var(--font-color-white);
   width: 20%;
   font-size: var(--font-size-a);
+  gap: 16px;
 }
 
 /* title elements */
@@ -178,6 +179,10 @@ a:hover {
 /* styles elements */
 hr {
   border-color: var(--secondary-background-color);
+}
+
+span {
+  font-weight: bold;
 }
 
 /* buttons elements */
