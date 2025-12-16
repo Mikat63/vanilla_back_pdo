@@ -102,13 +102,6 @@ footer {
   font-family: var(--text-font);
 }
 
-.form-container input {
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
 .patient {
   border: 2px solid var(--secondary-background-color);
   border-radius: 4px;

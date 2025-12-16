@@ -73,7 +73,7 @@ include "partials/header.php";
                 </form>
                 <?php
                     if (isset($_GET['success'])) {
-                        echo "<p class='green'>Les informations ont été modifiés avec succès</p>";
+                        echo "<p class='green'>Les informations du patient ont été modifiés avec succès</p>";
                     } else if (isset($_GET['error'])) {
                         switch (($_GET['error'])) {
                             case 'bad_method':

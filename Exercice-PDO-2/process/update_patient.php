@@ -17,7 +17,7 @@ if (empty(trim($_POST['id'])) || empty(trim($_POST['lastName'])) || empty(trim($
     exit();
 }
 
-if (strlen($_POST['id']) < 1) {
+if (!filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
     header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=errorId');
     exit();
 }
