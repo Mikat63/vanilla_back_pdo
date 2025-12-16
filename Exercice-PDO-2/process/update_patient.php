@@ -1,17 +1,24 @@
 <?php
 
+
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../update_patient.php?error=bad_method');
+    header('Location: ../profil_patient.php?error=bad_method');
     exit();
 }
 
-if (!isset($_POST['lastName']) || !isset($_POST['firstName']) || !isset($_POST['birthDate']) || !isset($_POST['email']) || !isset($_POST['phone'])) {
+if (!isset($_POST['id']) || !isset($_POST['lastName']) || !isset($_POST['firstName']) || !isset($_POST['birthDate']) || !isset($_POST['email']) || !isset($_POST['phone'])) {
     header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
-if (empty(trim($_POST['lastName'])) || empty(trim($_POST['firstName'])) || empty(trim($_POST['birthDate'])) || empty(trim($_POST['email'])) || empty(trim($_POST['phone']))) {
+if (empty(trim($_POST['id'])) || empty(trim($_POST['lastName'])) || empty(trim($_POST['firstName'])) || empty(trim($_POST['birthDate'])) || empty(trim($_POST['email'])) || empty(trim($_POST['phone']))) {
     header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
+    exit();
+}
+
+if (strlen($_POST['id']) < 1) {
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=errorId');
     exit();
 }
 
@@ -35,6 +42,7 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
+$id = htmlspecialchars(strip_tags($_POST['id']));
 $lastName = htmlspecialchars(strip_tags(strtoupper($_POST['lastName'])));
 $firstName = htmlspecialchars(strip_tags(ucfirst($_POST['firstName'])));
 $birthDate = htmlspecialchars(strip_tags($_POST['birthDate']));
@@ -44,15 +52,18 @@ $phone = htmlspecialchars(strip_tags($_POST['phone']));
 try {
     require_once "db_connect.php";
 
-    $request = $db->prepare("INSERT INTO 
-                                patients (`lastname`, 
-                                          `firstname`, 
-                                          `birthdate`, 
-                                          `phone`, 
-                                          `mail`) 
-                                    VALUES (:lastName,:firstName,:birthDate,:phone,:mail);");
+    $request = $db->prepare(
+        "UPDATE patients
+         SET lastname = :lastName,
+             firstname = :firstName,
+             birthdate = :birthDate,
+             phone = :phone,
+             mail = :mail
+         WHERE id = :id"
+    );
 
     $request->execute([
+        'id' => $id,
         'lastName' => $lastName,
         'firstName' => $firstName,
         'birthDate' => $birthDate,
@@ -60,8 +71,9 @@ try {
         'mail' => $email
     ]);
 
-    header("Location: ../profil_patient.php?success=success_process");
+    header("Location: ../profil_patient.php?id=" . $id . "&success=success_process");
+    exit();
 } catch (PDOException $error) {
-    header("Location: ../profil_patient.php?error=" . urlencode($error->getMessage()));
+    header("Location: ../profil_patient.php?id=" . $id . "&error=" . urlencode($error->getMessage()));
     exit();
 }

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Hospital - Accueil"; // Titre personnalisé
+$pageTitle = "Hospital - Accueil";
 include "partials/header.php"
 ?>
 
