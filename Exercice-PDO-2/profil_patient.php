@@ -157,6 +157,18 @@ include "partials/header.php";
             ?>
         </div>
 
+        <div>
+            <button class="button_delete" type="button">Supprimer</button>
+        </div>
+
+        <div class="modal_confirm">
+            <?php
+                    $processLink = "process/delete_patient_rendezvous.php";
+                    $nameRendezVous = "id_patient";
+                    $modalValue = $patient['id'];
+                    require_once "partials/modal_confirm.php";
+            ?>
+        </div>
     <?php
                 } else {
     ?>

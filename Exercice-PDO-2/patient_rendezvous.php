@@ -106,6 +106,9 @@ include "partials/header.php";
 
         <div class="modal_confirm">
             <?php
+                    $processLink = "process/delete_rendezvous";
+                    $nameRendezVous = "id_rendezvous";
+                    $modalValue = $patient['id_rendezvous'];
                     require_once "partials/modal_confirm.php";
             ?>
         </div>
@@ -115,9 +118,9 @@ include "partials/header.php";
     ?>
 
         <div class="error_message">
-            <p class="red">Patient introuvable</p>
+            <p class="red">Rendez-vous introuvable</p>
         </div>
-    <?php } ?>
+    <?php} ?>
 </div>
 
 

@@ -11,14 +11,16 @@ if (!isset($_POST['id_rendezvous'])) {
     exit();
 }
 
+$id = htmlspecialchars(strip_tags($_POST['id_rendezvous']));
 
 try {
-    $request = $db->prepare("DELETE 
+    $request = $db->prepare(
+        "DELETE 
                             FROM 
                                 appointments 
                             WHERE 
                                 id = :id_rendezvous;"
-                            );
+    );
 
     $deleteRendezVous = $request->execute([
         'id_rendezvous' => $_POST['id_rendezvous']
@@ -27,6 +29,6 @@ try {
     header("Location: ../liste_rendezvous.php");
     exit();
 } catch (PDOException $error) {
-    header("Location: ../profil_patient.php?id=" . $id . "&error=" . urlencode($error->getMessage()));
+    header("Location: ../patient_rendezvous.php?id=" . $id . "&error=" . urlencode($error->getMessage()));
     exit();
 }
