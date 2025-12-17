@@ -27,6 +27,7 @@
 
     <!-- CSS&JS files -->
     <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
     <title>Hopital</title>
 </head>
 

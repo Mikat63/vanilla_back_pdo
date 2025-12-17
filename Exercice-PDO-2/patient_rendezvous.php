@@ -96,17 +96,32 @@ include "partials/header.php";
                         }
                     }
                 ?>
-            </div>
-        <?php
-                } else {
-        ?>
 
-            <div class="error_message">
-                <p class="red">Patient introuvable</p>
             </div>
-        <?php } ?>
         </div>
-    </main>
+
+        <div>
+            <button class="button_delete" type="button">Supprimer</button>
+        </div>
+
+        <div class="modal_confirm">
+            <?php
+                    require_once "partials/modal_confirm.php";
+            ?>
+        </div>
+    <?php
+
+                } else {
+    ?>
+
+        <div class="error_message">
+            <p class="red">Patient introuvable</p>
+        </div>
+    <?php } ?>
+</div>
+
+
+</main>
 </div>
 
 <?php

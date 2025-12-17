@@ -15,6 +15,7 @@
   --font-color-black: black;
   --background-color: #2c5f7a;
   --secondary-background-color: #53768d;
+  --button_delete_red: red;
   --hover_color: rgb(31, 92, 119);
 }
 
@@ -85,6 +86,7 @@ footer {
   padding: 28px;
   width: 80%;
   font-size: var(--font-size-text);
+  position: relative;
 }
 
 .main_title_container {
@@ -141,6 +143,32 @@ footer {
   gap: 16px;
 }
 
+.modal_confirm {
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 0 8px var(--secondary-background-color);
+  padding: 16px;
+}
+
+.modal_form_container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
 /* nav elements */
 nav {
   display: flex;
@@ -195,10 +223,21 @@ span {
 }
 
 /* buttons elements */
-.form_button {
+.form_button,
+.button_modal_yes {
   border: none;
   border-radius: 4px;
   background: var(--secondary-background-color);
+  color: var(--font-color-white);
+  width: 72px;
+  height: 28px;
+}
+
+.button_delete,
+.button_modal_no {
+  border: none;
+  border-radius: 4px;
+  background: var(--button_delete_red);
   color: var(--font-color-white);
   width: 72px;
   height: 28px;
