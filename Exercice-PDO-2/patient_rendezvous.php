@@ -35,13 +35,16 @@ include "partials/header.php";
 
         <div class="patient_container">
             <div class="fiche_patient">
-                <?php if ($patient) { ?>
+                <?php if ($patient) {
+                    $date = new DateTime($patient['datehour']);
+                    $dateAfficher = $date->format('d/m/Y à H:i');
+                ?>
                     <div class="patient">
                         <p><strong><?= $patient['lastname'] . " " . $patient['firstname'] ?></strong></p>
                         <p><?= "<strong>Date de naissance : </strong>" . $patient['birthdate'] ?></p>
                         <p><?= "<strong>Email : </strong>" . $patient['mail'] ?></p>
                         <p><?= "<strong>Téléphone : </strong>" . $patient['phone'] ?></p>
-                        <p><?= "<strong>Rendez-vous le : </strong>" . $patient['datehour'] ?></p>
+                        <p><?= "<strong>Rendez-vous le : </strong>" . $dateAfficher ?></p>
                         <p><?= "<strong>Motif : </strong>" ?></p>
                     </div>
             </div>

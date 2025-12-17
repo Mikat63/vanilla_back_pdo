@@ -15,7 +15,7 @@ $request = $db->query("SELECT
                         JOIN patients AS pa ON pa.id = ap.patient_id  
                         ORDER BY 
                             datehour ASC;");
-                            
+
 $patients = $request->fetchAll();
 ?>
 
@@ -28,10 +28,13 @@ $patients = $request->fetchAll();
             <h2>Historique des rendez-vous</h2>
         </div>
         <ul>
-            <?php foreach ($patients as $patient): ?>
+            <?php foreach ($patients as $patient):
+                $date = new DateTime($patient['datehour']);
+                $dateAfficher = $date->format('d/m/Y à H:i');
+            ?>
                 <li>
                     <a href="patient_rendezvous.php?id=<?= $patient['id_rendezvous'] ?>">
-                        <?= htmlspecialchars($patient['datehour']) . " - " . htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
+                        <?= htmlspecialchars($dateAfficher) . " - " . htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
                     </a>
                 </li>
             <?php endforeach; ?>
