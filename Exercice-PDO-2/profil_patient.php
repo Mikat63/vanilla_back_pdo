@@ -2,6 +2,8 @@
 $pageTitle = "Hopital - profil patient";
 require_once "process/db_connect.php";
 
+
+// patient request
 if (isset($_GET['id'])) {
     $request = $db->prepare(
         "SELECT
@@ -17,6 +19,22 @@ if (isset($_GET['id'])) {
     ]);
 
     $patient = $request->fetch();
+
+    // rendezvous request
+    $rendezVousList = $db->prepare(
+        "SELECT
+                                *
+                            FROM
+                                appointments
+                            WHERE
+                                patient_id = :id;"
+    );
+
+    $rendezVousList->execute([
+        'id' => $_GET['id']
+    ]);
+
+    $rendezVous = $rendezVousList->fetchall();
 }
 
 include "partials/header.php";
@@ -39,8 +57,13 @@ include "partials/header.php";
                         <p><?= "<strong>Email : </strong>" . $patient['mail'] ?></p>
                         <p><?= "<strong>Téléphone : </strong>" . $patient['phone'] ?></p>
                     </div>
+
+
             </div>
+
+
             <hr>
+
 
             <div class="form_profil_container">
                 <form class="form_container" action="process/update_patient.php" method="POST">
@@ -107,16 +130,43 @@ include "partials/header.php";
                     }
                 ?>
             </div>
-        <?php
-                } else {
-        ?>
-
-            <div class="error_message">
-                <p class="red">Patient introuvable</p>
-            </div>
-        <?php } ?>
         </div>
-    </main>
+
+        <div class="rendezvous_container">
+            <h2>Rendez-vous</h2>
+            <?php
+                    if ($rendezVous && count($rendezVous) > 0) {
+            ?>
+                <ul>
+                    <?php
+                        foreach ($rendezVous as $eachRendezVous) {
+                            $date = new DateTime($eachRendezVous['datehour']);
+                            $dateAfficher = $date->format('d/m/Y à H:i');
+                    ?>
+                        <li><?= htmlspecialchars($dateAfficher) ?></li>
+                    <?php
+                        }
+                    ?>
+                </ul>
+            <?php
+                    } else {
+            ?>
+                <p>Aucun rendez-vous</p>
+            <?php
+                    }
+            ?>
+        </div>
+
+    <?php
+                } else {
+    ?>
+
+        <div class="error_message">
+            <p class="red">Patient introuvable</p>
+        </div>
+    <?php } ?>
+</div>
+</main>
 </div>
 
 <?php

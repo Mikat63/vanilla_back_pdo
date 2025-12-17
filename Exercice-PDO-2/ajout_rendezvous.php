@@ -9,7 +9,11 @@ $request = $db->query(
                           lastname,
                           firstname
                        FROM
-                           patients;"
+                            patients
+                       ORDER BY 
+                           lastName 
+                                ASC;"
+
 );
 
 $patients = $request->fetchAll();
