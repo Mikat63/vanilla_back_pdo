@@ -83,6 +83,26 @@ if (isset($_GET['lastname'])) {
         <form class="search_form" action="process/search_patient.php" method="POST">
             <input class=input_form name="search_patient" type="text" aria-label="Rechercher un patient" minlength="3" maxlength="30" placeholder="Entrez un nom">
             <button class="form_button" type="submit">Rechercher</button>
+
+            <?php if (isset($_GET['error'])) {
+                switch (($_GET['error'])) {
+                    case 'bad_method':
+                        echo "<p class='red'>Méthode incorrecte</p>";
+                        break;
+                    case 'missing':
+                        echo "<p class='red'>Tous les champs sont requis</p>";
+                        break;
+                    case 'empty':
+                        echo "<p class='red'>Les champs ne peuvent être vides</p>";
+                        break;
+                    case 'min':
+                        echo "<p class='red'>Les champs doivent avoir minimum 3 caractères</p>";
+                        break;
+                    case 'max':
+                        echo "<p class='red'>Les champs doivent avoir maximum 30 caractères</p>";
+                        break;
+                }
+            } ?>
         </form>
 
         <div class="list_patient_container">
