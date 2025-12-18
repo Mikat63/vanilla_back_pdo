@@ -4,8 +4,53 @@ $pageTitle = "Hopital - Liste patient";
 require_once "process/db_connect.php";
 include "partials/header.php";
 
+// elements by page
+$patientsByPage = 10;
+
+
+// control GET if int and positiv value
+if (isset($_GET['page'])) {
+    $page = (int)$_GET['page'];
+} else {
+    $page = 1;
+}
+
+if ($page < 1) {
+    $page = 1;
+}
+
+// pffset declaration
+$offset = ($page - 1) * $patientsByPage;
+
+// pagination request
+$requestPagination = $db->prepare(
+    "SELECT
+                                    *
+                                FROM
+                                    Patients 
+                                ORDER BY 
+                                    lastname ASC
+                                        LIMIT :limit
+                                        OFFSET :offset;"
+);
+
+$requestPagination->bindValue(':limit', $patientsByPage, PDO::PARAM_INT);
+$requestPagination->bindValue(':offset', $offset, PDO::PARAM_INT);
+$requestPagination->execute();
+
+// total request
+$totalPatients = $db->query(
+    "SELECT
+                                COUNT(*)
+                            FROM 
+                                patients;"
+)->fetchColumn();
+
+// total pages
+$totalPages = ceil($totalPatients / $patientsByPage);
 
 if (isset($_GET['lastname'])) {
+    // query for search patient
     $requestSearch = $db->prepare(
         "SELECT
                                       *
@@ -22,14 +67,7 @@ if (isset($_GET['lastname'])) {
 
     $patients = $requestSearch->fetchAll();
 } else {
-    $request = $db->query("SELECT 
-                            * 
-                       FROM 
-                            patients 
-                       ORDER BY 
-                            lastname 
-                                ASC;");
-    $patients = $request->fetchAll();
+    $patients = $requestPagination->fetchAll();
 }
 ?>
 
@@ -47,7 +85,7 @@ if (isset($_GET['lastname'])) {
             <button class="form_button" type="submit">Rechercher</button>
         </form>
 
-        <div>
+        <div class="list_patient_container">
             <?php
             if ($patients && count($patients) > 0) {
             ?>
@@ -60,6 +98,7 @@ if (isset($_GET['lastname'])) {
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
             <?php
             } else {
             ?>
@@ -67,6 +106,23 @@ if (isset($_GET['lastname'])) {
             <?php
             }
             ?>
+        </div>
+
+        <div class="pagination_list_container">
+            <ul class="pagination_list">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    if ($i === $page) { ?>
+                        <li class="links_list_patient"><?= $i; ?></strong></li>
+
+                    <?php
+                    } else { ?>
+                        <a href='?page=$i'><?= $i ?></a>
+
+                <?php
+                    }
+                } ?>
+            </ul>
         </div>
     </main>
 </div>

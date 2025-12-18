@@ -137,6 +137,18 @@ footer {
   gap: 72px;
 }
 
+.list_patient_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .fiche_patient {
   display: flex;
   flex-direction: column;
@@ -228,6 +240,10 @@ ul {
   width: 100%;
   gap: 8px;
   font-family: var(--title-font);
+}
+
+.links_list_patient {
+  color: var(--secondary-background-color);
 }
 
 /* links elements */

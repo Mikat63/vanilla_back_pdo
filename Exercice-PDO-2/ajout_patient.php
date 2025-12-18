@@ -39,7 +39,7 @@ include "partials/header.php";
             </div>
 
             <div>
-                <button class=input_form class="form_button" type="submit">Créer</button>
+                <button class="form_button" type="submit">Créer</button>
             </div>
         </form>
         <?php
