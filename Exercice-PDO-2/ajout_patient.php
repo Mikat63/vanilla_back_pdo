@@ -18,28 +18,28 @@ include "partials/header.php";
         <form class="form_container" action="./process/patient.php" method="POST">
             <div>
                 <label for="lastName">Nom :</label>
-                <input type="text" name="lastName" id="lastName" minlength="3" maxlength="50" placeholder="Entrez un nom" required>
+                <input class=input_form type="text" name="lastName" id="lastName" minlength="3" maxlength="50" placeholder="Entrez un nom" required>
             </div>
 
             <div>
                 <label for="firstName">Prénom:</label>
-                <input type="text" name="firstName" id="firstName" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                <input class=input_form type="text" name="firstName" id="firstName" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
             </div>
             <div>
                 <label for="birthDate">Date de naissance :</label>
-                <input type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
+                <input class=input_form type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
             </div>
             <div>
                 <label for="email">Email :</label>
-                <input type="email" name="email" id="email" minlength="3" maxlength="50" placeholder="Entrez une adresse email" required>
+                <input class=input_form type="email" name="email" id="email" minlength="3" maxlength="50" placeholder="Entrez une adresse email" required>
             </div>
             <div>
                 <label for="phone">Téléphone :</label>
-                <input type="tel" name="phone" id="phone" minlength="3" maxlength="50" placeholder="Entrez un téléphone" required>
+                <input class=input_form type="tel" name="phone" id="phone" minlength="3" maxlength="50" placeholder="Entrez un téléphone" required>
             </div>
 
             <div>
-                <button class="form_button" type="submit">Créer</button>
+                <button class=input_form class="form_button" type="submit">Créer</button>
             </div>
         </form>
         <?php
@@ -67,6 +67,12 @@ include "partials/header.php";
                     break;
                 case 'invalidMail':
                     echo "<p class='red'>L'email est invalide</p>";
+                    break;
+                case 'format_string':
+                    echo "<p class='red'>Le champ nom et prénom doivent contenir que des lettres</p>";
+                    break;
+                case 'format_phone':
+                    echo "<p class='red'>le champ téléphone doit contenir que des chiffres</p>";
                     break;
                 default:
                     echo "Erreur inconnue";

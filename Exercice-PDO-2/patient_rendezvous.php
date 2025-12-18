@@ -63,7 +63,7 @@ include "partials/header.php";
 
                     <div>
                         <label for="dateTime">Date et heure:</label>
-                        <input type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                        <input class=input_form type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
                     </div>
 
                     <div>
@@ -120,7 +120,9 @@ include "partials/header.php";
         <div class="error_message">
             <p class="red">Rendez-vous introuvable</p>
         </div>
-    <?php} ?>
+    <?php
+                }
+    ?>
 </div>
 
 

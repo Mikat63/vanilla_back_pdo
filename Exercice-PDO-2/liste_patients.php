@@ -22,15 +22,33 @@ $patients = $request->fetchAll();
         <div class="main_title_container">
             <h2>Historique des patients</h2>
         </div>
-        <ul>
-            <?php foreach ($patients as $patient): ?>
-                <li>
-                    <a href="profil_patient.php?id=<?= $patient['id'] ?>">
-                        <?= htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+
+        <form class="search_form" action="" method="POST">
+            <input class=input_form name="search_patient" type="text" aria-label="Rechercher un patient" minlength="3" maxlength="30" placeholder="Entrez un nom">
+            <button class="form_button" type="submit">Rechercher</button>
+        </form>
+
+        <div>
+            <?php
+            if ($patients && count($patients) > 0) {
+            ?>
+                <ul>
+                    <?php foreach ($patients as $patient): ?>
+                        <li>
+                            <a href="profil_patient.php?id=<?= $patient['id'] ?>">
+                                <?= htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php
+            } else {
+            ?>
+                <p>Aucun patient</p>
+            <?php
+            }
+            ?>
+        </div>
     </main>
 </div>
 

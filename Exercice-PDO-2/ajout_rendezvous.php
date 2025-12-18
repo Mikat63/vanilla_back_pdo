@@ -34,8 +34,8 @@ $patients = $request->fetchAll();
         <form class="form_container" action="./process/rendezvous.php" method="POST">
             <div>
                 <label for="patient">Patient :</label>
-                <select type="text" name="patient" id="patient" minlength="3" maxlength="50" required>
-                    <option value="">Selectionner un patient</option>
+                <select class=input_form type="text" name="patient" id="patient" minlength="3" maxlength="50" required>
+                    <option>Selectionner un patient</option>
                     <?php
                     foreach ($patients as $patient) { ?>
                         <option value="<?= htmlspecialchars($patient['id']) ?>"><?= htmlspecialchars($patient['lastname']) . " " . htmlspecialchars($patient['firstname']) ?></option>
@@ -47,7 +47,7 @@ $patients = $request->fetchAll();
 
             <div>
                 <label for="dateTime">Date et heure:</label>
-                <input type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                <input class=input_form type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
             </div>
 
             <div>

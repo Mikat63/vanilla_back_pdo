@@ -27,18 +27,33 @@ $patients = $request->fetchAll();
         <div class="main_title_container">
             <h2>Historique des rendez-vous</h2>
         </div>
-        <ul>
-            <?php foreach ($patients as $patient):
-                $date = new DateTime($patient['datehour']);
-                $dateAfficher = $date->format('d/m/Y à H:i');
+
+        <div>
+            <?php
+            if ($patients && count($patients) > 0) {
             ?>
-                <li>
-                    <a href="patient_rendezvous.php?id=<?= $patient['id_rendezvous'] ?>">
-                        <?= htmlspecialchars($dateAfficher) . " - " . htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+                <ul>
+                    <?php foreach ($patients as $patient):
+                        $date = new DateTime($patient['datehour']);
+                        $dateAfficher = $date->format('d/m/Y à H:i');
+                    ?>
+                        <li>
+                            <a href="patient_rendezvous.php?id=<?= $patient['id_rendezvous'] ?>">
+                                <?= htmlspecialchars($dateAfficher) . " - " . htmlspecialchars($patient['lastname'] . " " . $patient['firstname']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php
+            } else {
+            ?>
+                <div class="message_no_content">
+                    <p>Aucun patient</p>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
     </main>
 </div>
 

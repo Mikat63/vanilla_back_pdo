@@ -72,23 +72,23 @@ include "partials/header.php";
                     </div>
                     <div>
                         <label for="lastName">Nom :</label>
-                        <input type="text" name="lastName" id="lastName" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags(strtoupper($patient['lastname']))) ?>" required>
+                        <input class=input_form type="text" name="lastName" id="lastName" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags(strtoupper($patient['lastname']))) ?>" required>
                     </div>
                     <div>
                         <label for="firstName">Prénom:</label>
-                        <input type="text" name="firstName" id="firstName" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags(ucfirst($patient['firstname']))) ?>" required>
+                        <input class=input_form type="text" name="firstName" id="firstName" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags(ucfirst($patient['firstname']))) ?>" required>
                     </div>
                     <div>
                         <label for="birthDate">Date de naissance :</label>
-                        <input type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['birthdate'])) ?>" required>
+                        <input class=input_form type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['birthdate'])) ?>" required>
                     </div>
                     <div>
                         <label for="email">Email :</label>
-                        <input type="email" name="email" id="email" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['mail'])) ?>" required>
+                        <input class=input_form type="email" name="email" id="email" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['mail'])) ?>" required>
                     </div>
                     <div>
                         <label for="phone">Téléphone :</label>
-                        <input type="tel" name="phone" id="phone" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['phone'])) ?>" required>
+                        <input class=input_form type="tel" name="phone" id="phone" minlength="3" maxlength="50" value="<?= htmlspecialchars(strip_tags($patient['phone'])) ?>" required>
                     </div>
                     <div>
                         <button class="form_button" type="submit">Modifier</button>
@@ -122,6 +122,12 @@ include "partials/header.php";
                                 break;
                             case 'errorId':
                                 echo "<p class='red'>Patient introuvable</p>";
+                                break;
+                            case 'format_string':
+                                echo "<p class='red'>Le champ nom et prénom doivent contenir que des lettres</p>";
+                                break;
+                            case 'format_phone':
+                                echo "<p class='red'>le champ téléphone doit contenir que des chiffres</p>";
                                 break;
                             default:
                                 echo "Erreur inconnue";

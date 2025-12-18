@@ -25,8 +25,23 @@ if (strlen($_POST['lastName']) > 30 || strlen($_POST['firstName']) > 30 || strle
     exit();
 }
 
+$regexLastnameFirstname = '/^[\p{L} \'-]+$/u';
+
+if (!preg_match($regexLastnameFirstname, $_POST['lastName']) || !preg_match($regexLastnameFirstname, $_POST['firstName'])) {
+    header('Location: ../ajout_patient.php?error=format_String');
+    exit();
+}
+
+
 if (strlen($_POST['phone']) < 5 || strlen($_POST['phone']) > 15) {
     header('Location: ../ajout_patient.php?error=minMaxPhone');
+    exit();
+}
+
+$regexPhone = '/^(0|\+33 ?)[1-9]( ?\d{2}){4}$/';
+
+if (!preg_match($regexPhone, $_POST['phone'])) {
+    header('Location: ../ajout_patient.php?error=format_Phone');
     exit();
 }
 
