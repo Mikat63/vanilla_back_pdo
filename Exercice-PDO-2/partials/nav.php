@@ -12,7 +12,6 @@
 
         <li><a href="ajout_patient.php">Ajouter un patient</a></li>
         <li><a href="liste_patients.php?page=1">Liste des patients</a></li>
-        <li><a href="ajout_rendezvous.php">Ajouter rendez-vous</a></li>
     </ul>
     <hr>
     <ul class="nav-list">

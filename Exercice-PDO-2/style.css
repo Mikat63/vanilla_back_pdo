@@ -1,15 +1,17 @@
+/*        RESET            */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/*      VARIABLES           */
 :root {
   --title-font: manrope, sans-serif;
   --text-font: inter, sans-serif;
   --font-size-title: 42px;
   --font-size-h2: 24px;
-  --font-size-a: 20px;
+  --font-size-a: 16px;
   --font_size-text: 16px;
   --font-color-white: white;
   --font-color-black: black;
@@ -19,47 +21,107 @@
   --hover_color: rgb(31, 92, 119);
 }
 
+/*      LAYOUT GLOBAL       */
+html {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--text-font);
+  margin: 0;
+  padding: 0;
+}
+main {
+  flex: 1;
+}
+
+/*        HEADER            */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-color);
+  padding: 16px;
+  color: var(--font-color-white);
+  width: 100%;
+  box-sizing: border-box;
+}
+/*        RESET            */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*      VARIABLES           */
+:root {
+  --title-font: manrope, sans-serif;
+  --text-font: inter, sans-serif;
+  --font-size-title: 42px;
+  --font-size-h2: 24px;
+  --font-size-a: 16px;
+  --font_size-text: 16px;
+  --font-color-white: white;
+  --font-color-black: black;
+  --background-color: #2c5f7a;
+  --secondary-background-color: #53768d;
+  --button_delete_red: red;
+  --hover_color: rgb(31, 92, 119);
+}
+
+/*      LAYOUT GLOBAL       */
 html,
 body {
   height: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
   font-family: var(--text-font);
+  margin: 0;
+  padding: 0;
 }
 
+/*        HEADER            */
 header {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   background: var(--background-color);
   padding: 16px;
   color: var(--font-color-white);
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/*         MAIN             */
 main {
   display: flex;
+  flex-direction: column;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-main {
-  width: 80%;
-}
-
+/*        FOOTER            */
 footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   background: var(--background-color);
   padding: 12px;
   color: var(--font-color-white);
   flex-shrink: 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* classes elements */
+/*     CONTAINERS & SECTIONS*/
 .main_nav_container {
   display: flex;
   flex: 1;
@@ -79,11 +141,19 @@ footer {
   color: var(--font-color-black);
 }
 
+.main_gestion_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 16px;
+}
+
 .main_container_patient_profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 36px;
   padding: 28px;
   width: 80%;
   font-size: var(--font-size-text);
@@ -97,6 +167,7 @@ footer {
   align-items: center;
 }
 
+/*        FORMULAIRES       */
 .search_form {
   display: flex;
   flex-direction: row;
@@ -209,6 +280,7 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 }
 
 .form_patient_rendezvous {
@@ -224,7 +296,27 @@ footer {
   gap: 16px;
 }
 
+.add_patient_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 36px;
+}
+
+.add_rendezvous_container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 36px;
+}
+
 .message_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form_title {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -235,7 +327,7 @@ nav {
   display: flex;
   flex-direction: column;
   background: var(--secondary-background-color);
-  padding: 36px;
+  padding: 24px;
   color: var(--font-color-white);
   width: 20%;
   font-size: var(--font-size-a);
@@ -243,7 +335,6 @@ nav {
 }
 
 /* title elements */
-
 h1,
 h2,
 h3 {

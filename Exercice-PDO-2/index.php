@@ -9,42 +9,51 @@ include "partials/header.php"
     include "partials/nav.php";
     ?>
 
+
     <main class="main_container_patient_profile">
-        <div class="form_patient_rendezvous_container">
-            <form class="form_patient_rendezvous" action="" method="POST">
+        <div>
+            <h2>Création patient et prise de rendez-vous</h2>
+        </div>
 
-                <div class="add_patient">
-                    <div>
-                        <input type="hidden" name="id">
-                    </div>
-                    <div>
-                        <label for="lastName">Nom :</label>
-                        <input class=input_form type="text" name="lastName" id="lastName" minlength="3" maxlength="50" required>
-                    </div>
-                    <div>
-                        <label for="firstName">Prénom:</label>
-                        <input class=input_form type="text" name="firstName" id="firstName" minlength="3" maxlength="50" required>
-                    </div>
-                    <div>
-                        <label for="birthDate">Date de naissance :</label>
-                        <input class=input_form type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
-                    </div>
-                    <div>
-                        <label for="email">Email :</label>
-                        <input class=input_form type="email" name="email" id="email" minlength="3" maxlength="50" required>
-                    </div>
-                    <div>
-                        <label for="phone">Téléphone :</label>
-                        <input class=input_form type="tel" name="phone" id="phone" minlength="3" maxlength="50" required>
-                    </div>
-                </div>
+        <div class="main_gestion_container">
+            <form class="form_patient_rendezvous_container" action="" method="POST">
 
-                <hr>
+                <div class="patient_container">
+                    <div class="add_patient_container">
+                        <h3 class="form_title">Ajouter patient</h3>
+                        <div class="add_patient">
+                            <div>
+                                <label for="lastName">Nom :</label>
+                                <input class="input_form" type="text" name="lastName" id="lastName" minlength="3" maxlength="50" required>
+                            </div>
+                            <div>
+                                <label for="firstName">Prénom:</label>
+                                <input class="input_form" type="text" name="firstName" id="firstName" minlength="3" maxlength="50" required>
+                            </div>
+                            <div>
+                                <label for="birthDate">Date de naissance :</label>
+                                <input class="input_form" type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
+                            </div>
+                            <div>
+                                <label for="email">Email :</label>
+                                <input class="input_form" type="email" name="email" id="email" minlength="3" maxlength="50" required>
+                            </div>
+                            <div>
+                                <label for="phone">Téléphone :</label>
+                                <input class="input_form" type="tel" name="phone" id="phone" minlength="3" maxlength="50" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
 
-                <div>
-                    <div>
-                        <label for="dateTime">Date et heure:</label>
-                        <input class=input_form type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                    <div class="add_rendezvous_container">
+                        <div>
+                            <h3>Ajouter un rendez-vous</h3>
+                        </div>
+                        <div>
+                            <label for="dateTime">Date et heure:</label>
+                            <input class="input_form" type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                        </div>
                     </div>
                 </div>
                 <div class="message_container">
@@ -90,9 +99,11 @@ include "partials/header.php"
                     }
                     ?>
                 </div>
+                <div>
+                    <button class="form_button" type="submit">Modifier</button>
+                </div>
+            </form>
         </div>
-        </form>
-
     </main>
 </div>
 
