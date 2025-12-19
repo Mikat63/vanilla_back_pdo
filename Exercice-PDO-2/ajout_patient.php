@@ -27,7 +27,7 @@ include "partials/header.php";
             </div>
             <div>
                 <label for="birthDate">Date de naissance :</label>
-                <input class=input_form type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
+                <input class=input_form type="date" name="birthDate" id="birthDate" required>
             </div>
             <div>
                 <label for="email">Email :</label>
@@ -74,8 +74,14 @@ include "partials/header.php";
                 case 'format_phone':
                     echo "<p class='red'>le champ téléphone doit contenir que des chiffres</p>";
                     break;
+                case 'errorDate':
+                    echo "<p class='red'>Le rendez-vous ne peut être inférieur à la date du jour</p>";
+                    break;
+                case 'invalidDate':
+                    echo "<p class='red'>La date est invalide</p>";
+                    break;
                 default:
-                    echo "Erreur inconnue";
+                    echo "<p class='red'>Erreur inconnue</p>";
                     break;
             }
         }

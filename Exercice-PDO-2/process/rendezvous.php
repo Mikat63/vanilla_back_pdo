@@ -1,10 +1,12 @@
 <?php
 
+// control METHOD
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../ajout_rendezvous.php?error=bad_method');
     exit();
 }
 
+// control rendez-vous form
 if (!isset($_POST['patient']) || !isset($_POST['dateTime'])) {
     header('Location: ../ajout_rendezvous.php?error=missing');
     exit();
@@ -15,21 +17,29 @@ if (empty(trim($_POST['patient'])) || empty(trim($_POST['dateTime']))) {
     exit();
 }
 
-
+// control validate int
 if (!filter_var($_POST['patient'], FILTER_VALIDATE_INT)) {
     header('Location: ../ajout_rendezvous.php?error=errorId');
     exit();
 }
 
+
 $patient = htmlspecialchars(($_POST['patient']));
 $dateTime = htmlspecialchars(($_POST['dateTime']));
 
+
+// control valide date
 $date = DateTime::createFromFormat('Y-m-d\TH:i', $dateTime);
+
 if (!$date) {
     header('Location: ../ajout_rendezvous.php?error=invalid_date');
     exit();
 }
-
+$dateNow = new DateTime();
+if ($date < $dateNow) {
+    header('Location: ../ajout_rendezvous.php?error=errorDate');
+    exit();
+}
 
 try {
     require_once "db_connect.php";

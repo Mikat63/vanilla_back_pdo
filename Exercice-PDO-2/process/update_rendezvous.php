@@ -1,10 +1,11 @@
 <?php
-
+// control METHOD
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../patient_rendezvous.php?error=bad_method');
     exit();
 }
 
+// control rendez-vous form
 if (!isset($_POST['dateTime'])) {
     header('Location: ../patient_rendezvous.php?error=missing');
     exit();
@@ -15,7 +16,7 @@ if (empty(trim($_POST['dateTime']))) {
     exit();
 }
 
-
+// control int id
 if (!filter_var($_POST['id_patient'], FILTER_VALIDATE_INT)) {
     header('Location: ../patient_rendezvous.php?error=errorId');
     exit();
@@ -29,6 +30,21 @@ if (!filter_var($_POST['id_rendezvous'], FILTER_VALIDATE_INT)) {
 $patient = htmlspecialchars(($_POST['id_patient']));
 $rendezVous = htmlspecialchars(($_POST['id_rendezvous']));
 $dateTime = htmlspecialchars(($_POST['dateTime']));
+
+// control valide date
+$date = DateTime::createFromFormat('Y-m-d\TH:i', $dateTime);
+
+if (!$date) {
+    header('Location: ../patient_rendezvous.php?error=invalid_date');
+    exit();
+}
+$dateNow = new DateTime();
+if ($date < $dateNow) {
+    header('Location: ../ajout_rendezvous.php?error=errorDate');
+    exit();
+}
+
+
 
 $date = DateTime::createFromFormat('Y-m-d\TH:i', $dateTime);
 

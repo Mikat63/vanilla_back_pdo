@@ -1,10 +1,12 @@
 <?php
 
+// control METHOD
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../ajout_patient.php?error=bad_method');
+    header('Location: ../liste_patients.php?error=bad_method');
     exit();
 }
 
+// control input search form 
 if (!isset($_POST['search_patient'])) {
     header('Location: ../liste_patients.php?error=missing');
     exit();
@@ -25,6 +27,7 @@ if (strlen($_POST['search_patient']) > 30) {
     exit();
 }
 
+// control input string
 $regexLastname = '/^[\p{L} \'-]+$/u';
 
 if (!preg_match($regexLastname, $_POST['search_patient'])) {

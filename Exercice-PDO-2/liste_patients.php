@@ -90,16 +90,19 @@ if (isset($_GET['lastname'])) {
                         echo "<p class='red'>Méthode incorrecte</p>";
                         break;
                     case 'missing':
-                        echo "<p class='red'>Tous les champs sont requis</p>";
+                        echo "<p class='red'>Le champs est requis</p>";
                         break;
                     case 'empty':
-                        echo "<p class='red'>Les champs ne peuvent être vides</p>";
+                        echo "<p class='red'>Le champs ne peut être vides</p>";
                         break;
                     case 'min':
-                        echo "<p class='red'>Les champs doivent avoir minimum 3 caractères</p>";
+                        echo "<p class='red'>Le champs doit avoir minimum 3 caractères</p>";
                         break;
                     case 'max':
-                        echo "<p class='red'>Les champs doivent avoir maximum 30 caractères</p>";
+                        echo "<p class='red'>Le champs doit avoir maximum 30 caractères</p>";
+                        break;
+                    default:
+                        echo "<p class='red'>Erreur inconnue</p>";
                         break;
                 }
             } ?>
@@ -133,12 +136,11 @@ if (isset($_GET['lastname'])) {
                 <?php
                 for ($i = 1; $i <= $totalPages; $i++) {
                     if ($i === $page) { ?>
-                        <li class="links_list_patient"><?= $i; ?></strong></li>
+                        <li class="links_list_patient"><?= $i; ?></li>
 
                     <?php
                     } else { ?>
                         <a href='?page=$i'><?= $i ?></a>
-
                 <?php
                     }
                 } ?>

@@ -34,8 +34,8 @@ $patients = $request->fetchAll();
         <form class="form_container" action="./process/rendezvous.php" method="POST">
             <div>
                 <label for="patient">Patient :</label>
-                <select class=input_form type="text" name="patient" id="patient" minlength="3" maxlength="50" required>
-                    <option>Selectionner un patient</option>
+                <select class=input_form name="patient" id="patient" required>
+                    <option value="">Selectionner un patient</option>
                     <?php
                     foreach ($patients as $patient) { ?>
                         <option value="<?= htmlspecialchars($patient['id']) ?>"><?= htmlspecialchars($patient['lastname']) . " " . htmlspecialchars($patient['firstname']) ?></option>
@@ -47,7 +47,7 @@ $patients = $request->fetchAll();
 
             <div>
                 <label for="dateTime">Date et heure:</label>
-                <input class=input_form type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                <input class=input_form type="datetime-local" name="dateTime" id="dateTime" required>
             </div>
 
             <div>
@@ -71,8 +71,14 @@ $patients = $request->fetchAll();
                 case 'errorId':
                     echo "<p class='red'>Patient introuvable</p>";
                     break;
+                case 'errorDate':
+                    echo "<p class='red'>Le rendez-vous ne peut être inférieur à la date du jour</p>";
+                    break;
+                case 'invalidDate':
+                    echo "<p class='red'>La date est invalide</p>";
+                    break;
                 default:
-                    echo "Erreur inconnue";
+                    echo "<p class='red'>Erreur inconnue</p>";
                     break;
             }
         }

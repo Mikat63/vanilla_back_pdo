@@ -1,24 +1,27 @@
 <?php
+// control METHODS
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../patient_rendezvous.php?error=bad_method');
+    header('Location: ../profil_patient.php?error=bad_method');
     exit();
 }
 
+// control patient id
 if (!isset($_POST['id']) || !isset($_POST['lastName']) || !isset($_POST['firstName']) || !isset($_POST['birthDate']) || !isset($_POST['email']) || !isset($_POST['phone'])) {
-    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=bad_method');
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
 if (empty(trim($_POST['id'])) || empty(trim($_POST['lastName'])) || empty(trim($_POST['firstName'])) || empty(trim($_POST['birthDate'])) || empty(trim($_POST['email'])) || empty(trim($_POST['phone']))) {
-    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=bad_method');
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
 if (!filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
-    header('Location: ../patient_rendezvous.php?id=' . $_POST['id'] . '&error=errorId');
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=errorId');
     exit();
 }
 
+// control input form
 if (strlen($_POST['lastName']) < 3 || strlen($_POST['firstName']) < 3 || strlen($_POST['birthDate']) < 3 || strlen($_POST['email']) < 3) {
     header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
@@ -29,6 +32,17 @@ if (strlen($_POST['lastName']) > 30 || strlen($_POST['firstName']) > 30 || strle
     exit();
 }
 
+if (strlen($_POST['phone']) < 5 || strlen($_POST['phone']) > 15) {
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
+    exit();
+}
+
+if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
+    exit();
+}
+
+// control input string
 $regexLastnameFirstname = '/^[\p{L} \'-]+$/u';
 
 if (!preg_match($regexLastnameFirstname, $_POST['lastName']) || !preg_match($regexLastnameFirstname, $_POST['firstName'])) {
@@ -36,21 +50,11 @@ if (!preg_match($regexLastnameFirstname, $_POST['lastName']) || !preg_match($reg
     exit();
 }
 
-
-if (strlen($_POST['phone']) < 5 || strlen($_POST['phone']) > 15) {
-    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
-    exit();
-}
-
+// control int form
 $regexPhone = '/^(0|\+33 ?)[1-9]( ?\d{2}){4}$/';
 
 if (!preg_match($regexPhone, $_POST['phone'])) {
     header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=format_Phone');
-    exit();
-}
-
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    header('Location: ../profil_patient.php?id=' . $_POST['id'] . '&error=bad_method');
     exit();
 }
 
@@ -60,6 +64,21 @@ $firstName = htmlspecialchars(strip_tags(ucfirst($_POST['firstName'])));
 $birthDate = htmlspecialchars(strip_tags($_POST['birthDate']));
 $email = htmlspecialchars(strip_tags($_POST['email']));
 $phone = htmlspecialchars(strip_tags($_POST['phone']));
+
+
+// control valide date
+$date = DateTime::createFromFormat('Y-m-d', $birthdate);
+
+if (!$date) {
+    header('Location: ../profil_patient.php?error=invalid_date');
+    exit();
+}
+$dateNow = new DateTime();
+if ($date > $dateNow) {
+    header('Location: ../profil_patient.php?error=errorDate');
+    exit();
+}
+
 
 try {
     require_once "db_connect.php";

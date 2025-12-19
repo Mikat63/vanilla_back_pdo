@@ -16,7 +16,7 @@ include "partials/header.php"
         </div>
 
         <div class="main_gestion_container">
-            <form class="form_patient_rendezvous_container" action="" method="POST">
+            <form class="main_gestion_container" action="process/ajout_patient_rendezvous.php" method="POST">
 
                 <div class="patient_container">
                     <div class="add_patient_container">
@@ -32,7 +32,7 @@ include "partials/header.php"
                             </div>
                             <div>
                                 <label for="birthDate">Date de naissance :</label>
-                                <input class="input_form" type="date" name="birthDate" id="birthDate" minlength="3" maxlength="50" required>
+                                <input class="input_form" type="date" name="birthDate" id="birthDate" required>
                             </div>
                             <div>
                                 <label for="email">Email :</label>
@@ -52,14 +52,14 @@ include "partials/header.php"
                         </div>
                         <div>
                             <label for="dateTime">Date et heure:</label>
-                            <input class="input_form" type="datetime-local" name="dateTime" id="dateTime" minlength="3" maxlength="50" placeholder="Entrez un prénom" required>
+                            <input class="input_form" type="datetime-local" name="dateTime" id="dateTime" required>
                         </div>
                     </div>
                 </div>
                 <div class="message_container">
                     <?php
                     if (isset($_GET['success'])) {
-                        echo "<p class='green'>Les informations du patient ont été modifiés avec succès</p>";
+                        echo "<p class='green'>Les informations ont été enregistrés avec succès</p>";
                     } else if (isset($_GET['error'])) {
                         switch (($_GET['error'])) {
                             case 'bad_method':
@@ -83,24 +83,27 @@ include "partials/header.php"
                             case 'invalidMail':
                                 echo "<p class='red'>L'email est invalide</p>";
                                 break;
-                            case 'errorId':
-                                echo "<p class='red'>Patient introuvable</p>";
-                                break;
                             case 'format_string':
                                 echo "<p class='red'>Le champ nom et prénom doivent contenir que des lettres</p>";
                                 break;
                             case 'format_phone':
                                 echo "<p class='red'>le champ téléphone doit contenir que des chiffres</p>";
                                 break;
+                            case 'errorDate':
+                                echo "<p class='red'>Le rendez-vous ne peut être inférieur à la date du jour</p>";
+                                break;
+                            case 'invalidDate':
+                                echo "<p class='red'>La date est invalide</p>";
+                                break;
                             default:
-                                echo "Erreur inconnue";
+                                echo "<p class='red'>Erreur inconnue</p>";
                                 break;
                         }
                     }
                     ?>
                 </div>
-                <div>
-                    <button class="form_button" type="submit">Modifier</button>
+                <div class=button_container>
+                    <button class="form_button" type="submit">Valider</button>
                 </div>
             </form>
         </div>
